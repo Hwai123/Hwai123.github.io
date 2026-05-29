@@ -16,16 +16,10 @@ export const siteConfig: SiteConfig = {
 	site_url: "https://Hwai123.github.io",
 
 	// 站点描述
-	description:
-		"Toadally's personal blog, built with Astro.",
+	description: "Toadally's personal blog, built with Astro.",
 
 	// 站点关键词
-	keywords: [
-		"Toadally",
-		"博客",
-		"技术博客",
-		"静态博客",
-	],
+	keywords: ["Toadally", "博客", "技术博客", "静态博客"],
 
 	// 主题色
 	themeColor: {
