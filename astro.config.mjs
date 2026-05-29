@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === "development") {
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://<username>.github.io", // 替换为你的站点URL
+	site: "https://Hwai123.github.io", // 替换为你的站点URL
 
 	base: "/",
 	trailingSlash: "always",
