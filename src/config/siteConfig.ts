@@ -10,21 +10,18 @@ export const siteConfig: SiteConfig = {
 	title: "Toadally",
 
 	// 站点副标题
-	subtitle: "Demo site",
+	subtitle: "Personal Blog of Toadally",
 
 	// 站点 URL
 	site_url: "https://Hwai123.github.io",
 
 	// 站点描述
 	description:
-		"Toadally's personal blog, a demo site built with Astro and Firefly theme.",
+		"Toadally's personal blog, built with Astro.",
 
 	// 站点关键词
 	keywords: [
-		"Firefly",
-		"Fuwari",
-		"Astro",
-		"ACGN",
+		"Toadally",
 		"博客",
 		"技术博客",
 		"静态博客",
@@ -33,7 +30,7 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 49,
+		hue: 235,
 		// 是否对访问者隐藏主题色选择器
 		fixed: false,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
@@ -79,7 +76,7 @@ export const siteConfig: SiteConfig = {
 			alt: "🍀",
 		},
 		// 导航栏标题
-		title: "Firefly",
+		title: "Toadally",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
 		widthFull: false,
 		// 导航菜单对齐方式，left：左对齐，center：居中
