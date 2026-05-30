@@ -47,6 +47,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			"assets/images/DesktopWallpaper/d4.avif",
 			"assets/images/DesktopWallpaper/d5.avif",
 			"assets/images/DesktopWallpaper/d6.avif",
+			"assets/images/DesktopWallpaper/desktopWallpaper1.avif",
 		],
 		// 移动背景图片（支持单张或多张随机）
 		// mobile: "assets/images/MobileWallpaper/m1.avif",
@@ -57,12 +58,13 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			"assets/images/MobileWallpaper/m4.avif",
 			"assets/images/MobileWallpaper/m5.avif",
 			"assets/images/MobileWallpaper/m6.avif",
+			"assets/images/MobileWallpaper/mobileWallpaper1.avif",
 		],
 	},
 	// 横幅壁纸和全屏壁纸共享配置
 	common: {
 		// 横幅文字遮罩暗度，0-1之间，值越大越暗
-		dimOpacity: 0.2,
+		dimOpacity: 0.3,
 		// 主页横幅文字
 		homeText: {
 			// 是否启用主页横幅文字
