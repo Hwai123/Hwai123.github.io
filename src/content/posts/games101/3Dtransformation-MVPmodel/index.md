@@ -1,5 +1,5 @@
 ---
-title: "GAMES101 Lecture 04 Transformation Cont."
+title: "GAMES101 2-三维变换与MVP变换"
 published: 2026-05-13
 description: "图形学要把世界中的三维几何显示成二维图像。这个过程的数学骨架是使用 MVP： - Model 负责把模型放进世界 - View 负责把世界放到相机坐标系 - Projection 负责把可见空间压到标准立方体 后续光栅化再把标准坐标映射到屏幕像素。"
 tags: ["计算机图形学","GAMES101"]
@@ -9,7 +9,7 @@ sourceLink: "https://www.bilibili.com/video/BV1X7411F744?p=4"
 ---
 
 <!-- synced-from-obsidian -->
-# GAMES101 2-三维变换
+# GAMES101 2-三维变换与MVP变换
 
 ## 核心问题/Motivation
 
@@ -167,7 +167,7 @@ $$
 
 透视投影的视体是一个截头锥体，近处物体投到成像平面上更大，远处物体更小。
 
-![Pasted image 20260513155941](./assets/Pasted-image-20260513155941.png)
+![Pasted image 20260513155941](/obsidian-assets/games101/3Dtransformation-MVPmodel/Pasted-image-20260513155941.png)
 
 透视投影可先把视锥体挤压成正交投影可处理的长方体，再套用正交投影：
 
@@ -189,7 +189,7 @@ $$
 
 ### $M_{persp\rightarrow ortho}$ 推导
 ##### 从相似三角形透视方程推导
-<img src="./assets/Pasted-image-20260513160452.png" width="354" alt="Pasted image 20260513160452" />
+![Pasted image 20260513160452](/obsidian-assets/games101/3Dtransformation-MVPmodel/Pasted-image-20260513160452.png)
 $y$ 和 $x$ 投影在 view plane 上的大小和 $z$ 成反比
 即
 $$
@@ -296,7 +296,7 @@ $$
 $$
 l=-r , b = -t
 $$
-<img src="./assets/Pasted-image-20260514165101.png" width="500" alt="Pasted image 20260514165101" />
+![Pasted image 20260514165101](/obsidian-assets/games101/3Dtransformation-MVPmodel/Pasted-image-20260514165101.png)
 
 此时，只需给定宽高比 aspect ratio ，视角 field of view 和 $n$
 就能计算：

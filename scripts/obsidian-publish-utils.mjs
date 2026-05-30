@@ -59,6 +59,10 @@ export async function readConfig() {
 		throw new Error("obsidian-publish.config.json 缺少 outputRoot。");
 	}
 
+	if (!config.publicAssetRoot) {
+		config.publicAssetRoot = "public/obsidian-assets";
+	}
+
 	if (!Array.isArray(config.notes)) {
 		config.notes = [];
 	}

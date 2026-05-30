@@ -219,21 +219,39 @@ async function resolveExcalidrawExport(target, sourceDir, vaultRoot, config) {
 	return findFirstExisting(candidates);
 }
 
-async function copyAsset(sourcePath, assetDir, usedNames) {
+function publicSlugPath(slug) {
+	return cleanSlug(slug)
+		.split("/")
+		.map((part) =>
+			part
+				.normalize("NFKC")
+				.replace(/[<>:"\\|?*\u0000-\u001f]/g, "-")
+				.replace(/\s+/g, "-")
+				.replace(/-+/g, "-")
+				.replace(/^-|-$/g, "") || "note",
+		)
+		.join("/");
+}
+
+async function copyPublicAsset(sourcePath, context) {
 	const safeName = safeAssetName(sourcePath);
 	let finalName = safeName;
 	let counter = 2;
 
-	while (usedNames.has(finalName)) {
+	while (context.usedNames.has(finalName)) {
 		const parsed = path.parse(safeName);
 		finalName = `${parsed.name}-${counter}${parsed.ext}`;
 		counter++;
 	}
 
-	usedNames.add(finalName);
-	await fs.mkdir(assetDir, { recursive: true });
-	await fs.copyFile(sourcePath, path.join(assetDir, finalName));
-	return `./assets/${finalName}`;
+	context.usedNames.add(finalName);
+	await fs.mkdir(context.publicAssetDir, { recursive: true });
+	await fs.copyFile(sourcePath, path.join(context.publicAssetDir, finalName));
+	return `${context.publicUrlBase}/${encodeURIComponent(finalName).replaceAll("%2F", "/")}`;
+}
+
+function markdownImage(src, alt) {
+	return `![${alt.replace(/[\[\]]/g, "")}](${src})`;
 }
 
 async function transformEmbeds(markdown, context) {
@@ -245,7 +263,6 @@ async function transformEmbeds(markdown, context) {
 		output += markdown.slice(lastIndex, match.index);
 
 		const target = match[1].trim();
-		const width = match[2]?.trim();
 		const cleanTarget = stripAnchor(target);
 		const displayName = noteDisplayName(cleanTarget);
 
@@ -253,12 +270,8 @@ async function transformEmbeds(markdown, context) {
 			const asset = await resolveAsset(cleanTarget, context.sourceDir, context.vaultRoot, context.config);
 
 			if (asset) {
-				const rel = await copyAsset(asset, context.assetDir, context.usedNames);
-				output += isImagePath(cleanTarget)
-					? width
-						? `<img src="${rel}" width="${width}" alt="${displayName}" />`
-						: `![${displayName}](${rel})`
-					: `[${displayName}](${rel})`;
+				const rel = await copyPublicAsset(asset, context);
+				output += isImagePath(cleanTarget) ? markdownImage(rel, displayName) : `[${displayName}](${rel})`;
 			} else {
 				warnings.push(`${context.note.source}: 找不到附件 ${cleanTarget}`);
 				output += `> [!warning]\n> 找不到附件：${cleanTarget}`;
@@ -267,10 +280,8 @@ async function transformEmbeds(markdown, context) {
 			const exported = await resolveExcalidrawExport(cleanTarget, context.sourceDir, context.vaultRoot, context.config);
 
 			if (exported) {
-				const rel = await copyAsset(exported, context.assetDir, context.usedNames);
-				output += width
-					? `<img src="${rel}" width="${width}" alt="${displayName}" />`
-					: `![${displayName}](${rel})`;
+				const rel = await copyPublicAsset(exported, context);
+				output += markdownImage(rel, displayName);
 			} else {
 				warnings.push(`${context.note.source}: 找不到 Excalidraw 导出图 ${cleanTarget}`);
 				output += `> [!warning]\n> 找不到 Excalidraw 导出图：${cleanTarget}`;
@@ -317,8 +328,14 @@ async function syncNote(note, config, publishedNoteMap, options) {
 	const slug = cleanSlug(note.slug);
 	const outDir = path.resolve(outputRoot, slug);
 	const assetDir = path.join(outDir, "assets");
+	const publicAssetRoot = path.resolve(config.publicAssetRoot ?? "public/obsidian-assets");
+	const publicAssetDir = path.resolve(publicAssetRoot, publicSlugPath(slug));
+	const publicRoot = path.resolve("public");
+	const relativePublicUrl = path.relative(publicRoot, publicAssetDir);
+	const publicUrlBase = `/${normalizeSlash(relativePublicUrl)}`;
 	const indexPath = path.join(outDir, "index.md");
 	const relativeOut = path.relative(outputRoot, outDir);
+	const relativePublicOut = path.relative(publicAssetRoot, publicAssetDir);
 
 	if (!slug) {
 		throw new Error(`${source}: 缺少 slug。`);
@@ -328,7 +345,17 @@ async function syncNote(note, config, publishedNoteMap, options) {
 		throw new Error(`${source}: slug 输出到了 outputRoot 外部，请检查配置。`);
 	}
 
+	if (relativePublicOut.startsWith("..") || path.isAbsolute(relativePublicOut)) {
+		throw new Error(`${source}: publicAssetRoot 输出路径异常，请检查配置。`);
+	}
+
+	if (relativePublicUrl.startsWith("..") || path.isAbsolute(relativePublicUrl)) {
+		throw new Error(`${source}: publicAssetRoot 必须位于 public 目录下，这样 push 后图片才会发布。`);
+	}
+
 	await assertSafeWrite(indexPath, options.force);
+	await fs.rm(assetDir, { recursive: true, force: true });
+	await fs.rm(publicAssetDir, { recursive: true, force: true });
 
 	const raw = await fs.readFile(absoluteSource, "utf8");
 	const stat = await fs.stat(absoluteSource);
@@ -341,6 +368,8 @@ async function syncNote(note, config, publishedNoteMap, options) {
 		vaultRoot,
 		sourceDir: path.dirname(absoluteSource),
 		assetDir,
+		publicAssetDir,
+		publicUrlBase,
 		usedNames,
 		publishedNoteMap,
 	};
