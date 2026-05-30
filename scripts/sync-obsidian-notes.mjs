@@ -148,12 +148,24 @@ function resolveWikiLink(target, alias, publishedNoteMap) {
 
 function candidateAssetPaths({ target, sourceDir, vaultRoot, config }) {
 	const cleanTarget = normalizeSlash(stripAnchor(target)).replace(/^attachments\//, "");
-	const candidates = [
-		path.resolve(sourceDir, cleanTarget),
-		path.resolve(sourceDir, "attachments", cleanTarget),
-		path.resolve(vaultRoot, cleanTarget),
-		path.resolve(vaultRoot, "attachments", cleanTarget),
-	];
+	const candidates = [];
+	const resolvedVaultRoot = path.resolve(vaultRoot);
+	let currentDir = path.resolve(sourceDir);
+
+	while (currentDir.startsWith(resolvedVaultRoot)) {
+		candidates.push(path.resolve(currentDir, cleanTarget));
+		candidates.push(path.resolve(currentDir, "attachments", cleanTarget));
+
+		if (currentDir === resolvedVaultRoot) {
+			break;
+		}
+
+		const parentDir = path.dirname(currentDir);
+		if (parentDir === currentDir) {
+			break;
+		}
+		currentDir = parentDir;
+	}
 
 	for (const dir of config.assetSearchDirs ?? []) {
 		candidates.push(path.resolve(vaultRoot, dir, cleanTarget));
@@ -184,11 +196,16 @@ async function resolveExcalidrawExport(target, sourceDir, vaultRoot, config) {
 		.replace(/\.excalidraw\.md$/i, "")
 		.replace(/\.excalidraw$/i, "")
 		.replace(/\.md$/i, "");
+	const targetFileBase = path.posix.basename(cleanTarget).replace(/\.(md|excalidraw)$/i, "");
 	const names = [
 		`${targetBase}.svg`,
 		`${targetBase}.png`,
 		`${targetBase}.webp`,
 		`${targetBase}.avif`,
+		`${targetFileBase}.svg`,
+		`${targetFileBase}.png`,
+		`${targetFileBase}.webp`,
+		`${targetFileBase}.avif`,
 		`${path.posix.basename(cleanTarget)}.svg`,
 		`${path.posix.basename(cleanTarget)}.png`,
 	];
@@ -379,4 +396,3 @@ main().catch((error) => {
 	console.error(error.message);
 	process.exit(1);
 });
-

@@ -31,10 +31,7 @@
       "description": "图形学要把世界中的三维几何显示成二维图像。这个过程的数学骨架是使用 MVP： - Model 负责把模型放进世界 - View 负责把世界放到相机坐标系 - Projection 负责把可见空间压到标准立方体 后续光栅化再把标准坐标映射到屏幕像素。",
       "tags": [
         "计算机图形学",
-        "GAMES101",
-        "图形变换",
-        "MVP",
-        "投影"
+        "GAMES101"
       ],
       "category": "计算机图形学",
       "sourceLink": "https://www.bilibili.com/video/BV1X7411F744?p=4",

@@ -4,7 +4,7 @@
 
 ## 关于本站
 
-这个网站使用 **Astro** 框架构建，用来记录我的学习、想法和项目。
+这个网站使用 **Firefly** 模板 和 **Astro** 框架构建，用来记录我的学习、想法和项目。
 
 **GitHub： [https://github.com/Hwai123](https://github.com/Hwai123)**
 
