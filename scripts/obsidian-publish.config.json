@@ -1,0 +1,44 @@
+{
+  "vaultRoot": "C:/Users/TH_Ang/Documents/Obsidian_folder",
+  "outputRoot": "src/content/posts",
+  "noteSearchDirs": [
+    "",
+    "Programming_Game_Development"
+  ],
+  "assetSearchDirs": [
+    "attachments"
+  ],
+  "notes": [
+    {
+      "source": "Programming_Game_Development/计算机图形学/GAMES101/1-线性代数与图形变换基础.md",
+      "slug": "games101/linear-transformation-basic",
+      "title": "GAMES101 Lecture 02-03 线性代数与图形变换基础",
+      "published": "2026-05-13",
+      "description": "计算机图形学需要把“看见的几何”转成“可计算的代数”。点、方向、法线、相机、模型姿态和屏幕坐标都要通过向量与矩阵表达；渲染管线中的旋转、缩放、平移、投影，本质上是在不同坐标系之间移动几何数据。",
+      "tags": [
+        "计算机图形学",
+        "GAMES101"
+      ],
+      "category": "计算机图形学",
+      "sourceLink": "https://www.bilibili.com/video/BV1X7411F744?p=3",
+      "draft": false
+    },
+    {
+      "source": "Programming_Game_Development/计算机图形学/GAMES101/2-三维变换与MVP变换.md",
+      "slug": "games101/3Dtransformation-MVPmodel",
+      "title": "GAMES101 Lecture 04 Transformation Cont.",
+      "published": "2026-05-13",
+      "description": "图形学要把世界中的三维几何显示成二维图像。这个过程的数学骨架是使用 MVP： - Model 负责把模型放进世界 - View 负责把世界放到相机坐标系 - Projection 负责把可见空间压到标准立方体 后续光栅化再把标准坐标映射到屏幕像素。",
+      "tags": [
+        "计算机图形学",
+        "GAMES101",
+        "图形变换",
+        "MVP",
+        "投影"
+      ],
+      "category": "计算机图形学",
+      "sourceLink": "https://www.bilibili.com/video/BV1X7411F744?p=4",
+      "draft": false
+    }
+  ]
+}
