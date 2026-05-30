@@ -46,7 +46,7 @@ $$
 
 点乘的结果是标量，用来衡量两个方向的一致程度。
 
-GAMES101 向量点乘与投影.relationship
+![GAMES101 向量点乘与投影](/obsidian-assets/games101/linear-transformation-basic/GAMES101-%E5%90%91%E9%87%8F%E7%82%B9%E4%B9%98%E4%B8%8E%E6%8A%95%E5%BD%B1.relationship.svg)
 
 **常用结论**：
 
@@ -77,7 +77,7 @@ $$
 \|\mathbf{a}\times\mathbf{b}\|=\|\mathbf{a}\|\|\mathbf{b}\|\sin\theta
 $$
 
-GAMES101 叉乘与右手系.relationship
+![GAMES101 叉乘与右手系](/obsidian-assets/games101/linear-transformation-basic/GAMES101-%E5%8F%89%E4%B9%98%E4%B8%8E%E5%8F%B3%E6%89%8B%E7%B3%BB.relationship.svg)
 
 **核心用途**：
 
@@ -145,7 +145,7 @@ x\\y\\1
 \end{bmatrix}
 $$
 
-GAMES101 齐次坐标与仿射变换.relationship
+![GAMES101 齐次坐标与仿射变换](/obsidian-assets/games101/linear-transformation-basic/GAMES101-%E9%BD%90%E6%AC%A1%E5%9D%90%E6%A0%87%E4%B8%8E%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2.relationship.svg)
 
 > [!note] 直觉理解
 > $w=1$ 的对象是点，会被平移影响；$w=0$ 的对象是向量，只表达方向和差值，因此不应被平移影响。

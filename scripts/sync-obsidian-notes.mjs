@@ -193,6 +193,7 @@ async function resolveExcalidrawExport(target, sourceDir, vaultRoot, config) {
 	const targetDir = path.posix.dirname(cleanTarget);
 	const targetBase = path.posix.basename(cleanTarget)
 		.replace(/\.relationship\.md$/i, "")
+		.replace(/\.relationship$/i, "")
 		.replace(/\.excalidraw\.md$/i, "")
 		.replace(/\.excalidraw$/i, "")
 		.replace(/\.md$/i, "");

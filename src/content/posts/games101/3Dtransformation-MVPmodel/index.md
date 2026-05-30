@@ -79,7 +79,7 @@ $$
 
 视图变换把世界坐标变成相机坐标。给定相机位置 $\mathbf{e}$、观察方向 $\mathbf{g}$、上方向 $\mathbf{t}$，目标是把相机移动到原点，使其朝向标准的 $-z$ 方向，上方向对齐 $y$ 轴。
 
-GAMES101 相机视图变换.relationship
+![GAMES101 相机视图变换](/obsidian-assets/games101/3Dtransformation-MVPmodel/GAMES101-%E7%9B%B8%E6%9C%BA%E8%A7%86%E5%9B%BE%E5%8F%98%E6%8D%A2.relationship.svg)
 
 视图矩阵通常分为两步：
 
@@ -133,7 +133,7 @@ $$
 
 正交投影视体是一个长方体，投影方向互相平行，因此不会出现近大远小。
 
-GAMES101 正交投影视体盒.relationship
+![GAMES101 正交投影视体盒](/obsidian-assets/games101/3Dtransformation-MVPmodel/GAMES101-%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%E8%A7%86%E4%BD%93%E7%9B%92.relationship.svg)
 
 给定视体边界 $l,r,b,t,n,f$，正交投影做两件事：先把长方体中心平移到原点，再缩放到 $[-1,1]^3$。
 
@@ -318,7 +318,7 @@ $$
 屏幕空间用像素为单位描述点的位置。像素中心位于整数坐标，整个图像边界比最小/最大像素中心多出半个单位。因此当画面大小为 $n_x \times n_y$ 时，$[-1,1]^2$ 被映射到 $[-0.5,n_x-0.5]\times[-0.5,n_y-0.5]$。
 ### 视口变换
 
-GAMES101 视口变换与像素坐标.relationship
+![GAMES101 视口变换与像素坐标](/obsidian-assets/games101/3Dtransformation-MVPmodel/GAMES101-%E8%A7%86%E5%8F%A3%E5%8F%98%E6%8D%A2%E4%B8%8E%E5%83%8F%E7%B4%A0%E5%9D%90%E6%A0%87.relationship.svg)
 
 视口矩阵可写为：
 

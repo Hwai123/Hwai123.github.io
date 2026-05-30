@@ -316,7 +316,7 @@ export function isDocumentAssetPath(value) {
 }
 
 export function isExcalidrawPath(value) {
-	return /(\.relationship\.md|\.excalidraw|\.excalidraw\.md)$/i.test(value);
+	return /(\.relationship|\.relationship\.md|\.excalidraw|\.excalidraw\.md)$/i.test(value);
 }
 
 export function stripAnchor(value) {
