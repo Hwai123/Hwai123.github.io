@@ -60,7 +60,7 @@ export const commentConfig: CommentConfig = {
 		// 设置 Giscus 评论系统分类
 		category: "General",
 		// 获取 Giscus 评论系统分类ID
-		categoryId: "DIC_kwDOSrkW2s4C-M9A",
+		categoryId: "DIC_kwDOSrkW2s4C-M9B",
 		// 获取 Giscus 评论系统映射方式
 		mapping: "title",
 		// 获取 Giscus 评论系统严格模式
